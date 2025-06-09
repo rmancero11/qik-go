@@ -95,7 +95,3 @@ function registrarVenta() {
 | SQL       | Creás una función que hace múltiples tareas dentro de la BD |
 | Flask API | Llama la función vía `.rpc(nombre_función, {param})`        |
 | Frontend  | Envia los datos por `fetch()` a tu endpoint Flask           |
-
----
-
-¿Querés que te ayude a diseñar esa tabla `ventas` y la lógica completa de la función en SQL según tu caso real?
