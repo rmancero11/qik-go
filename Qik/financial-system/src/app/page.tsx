@@ -1,14 +1,31 @@
-import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { HydrationBoundary } from "@/components/hydration-boundary"
-import { LayoutDashboard, Receipt, CreditCard, Package, TruckIcon, PlusCircle, Droplets } from "lucide-react"
-import { Logo } from "@/components/logo"
-import dynamic from "next/dynamic"
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { HydrationBoundary } from "@/components/hydration-boundary";
+import {
+  LayoutDashboard,
+  Receipt,
+  CreditCard,
+  Package,
+  TruckIcon,
+  PlusCircle,
+  Droplets,
+} from "lucide-react";
+import { Logo } from "@/components/logo";
+import dynamic from "next/dynamic";
 
 // Cargar componentes dinámicamente para evitar problemas de hidratación
 const DailyProfitChart = dynamic(
-  () => import("@/components/dashboard/daily-profit-chart-safe").then((mod) => ({ default: mod.DailyProfitChart })),
+  () =>
+    import("@/components/daily-profit-chart-safe").then((mod) => ({
+      default: mod.DailyProfitChart,
+    })),
   {
     ssr: false,
     loading: () => (
@@ -16,11 +33,14 @@ const DailyProfitChart = dynamic(
         <div className="text-muted-foreground">Cargando gráfico...</div>
       </div>
     ),
-  },
-)
+  }
+);
 
 const MonthlyProfitChart = dynamic(
-  () => import("@/components/dashboard/monthly-profit-chart-safe").then((mod) => ({ default: mod.MonthlyProfitChart })),
+  () =>
+    import("@/components/monthly-profit-chart-safe").then((mod) => ({
+      default: mod.MonthlyProfitChart,
+    })),
   {
     ssr: false,
     loading: () => (
@@ -28,11 +48,14 @@ const MonthlyProfitChart = dynamic(
         <div className="text-muted-foreground">Cargando gráfico...</div>
       </div>
     ),
-  },
-)
+  }
+);
 
 const CashFlowSummary = dynamic(
-  () => import("@/components/dashboard/cash-flow-summary-safe").then((mod) => ({ default: mod.CashFlowSummary })),
+  () =>
+    import("@/components/cash-flow-summary-safe").then((mod) => ({
+      default: mod.CashFlowSummary,
+    })),
   {
     ssr: false,
     loading: () => (
@@ -40,11 +63,14 @@ const CashFlowSummary = dynamic(
         <div className="text-muted-foreground">Cargando gráfico...</div>
       </div>
     ),
-  },
-)
+  }
+);
 
 const InventorySummary = dynamic(
-  () => import("@/components/dashboard/inventory-summary").then((mod) => ({ default: mod.InventorySummary })),
+  () =>
+    import("@/components/inventory-summary").then((mod) => ({
+      default: mod.InventorySummary,
+    })),
   {
     ssr: false,
     loading: () => (
@@ -57,17 +83,23 @@ const InventorySummary = dynamic(
         ))}
       </div>
     ),
-  },
-)
+  }
+);
 
 const SupplierSummary = dynamic(
-  () => import("@/components/dashboard/supplier-summary").then((mod) => ({ default: mod.SupplierSummary })),
+  () =>
+    import("@/components/supplier-summary").then((mod) => ({
+      default: mod.SupplierSummary,
+    })),
   {
     ssr: false,
     loading: () => (
       <div className="space-y-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="animate-pulse flex justify-between items-center border-b pb-3">
+          <div
+            key={i}
+            className="animate-pulse flex justify-between items-center border-b pb-3"
+          >
             <div className="space-y-1">
               <div className="h-4 bg-muted rounded w-24"></div>
               <div className="h-3 bg-muted rounded w-16"></div>
@@ -80,11 +112,14 @@ const SupplierSummary = dynamic(
         ))}
       </div>
     ),
-  },
-)
+  }
+);
 
 const RecentTransactions = dynamic(
-  () => import("@/components/dashboard/recent-transactions").then((mod) => ({ default: mod.RecentTransactions })),
+  () =>
+    import("@/components/recent-transactions").then((mod) => ({
+      default: mod.RecentTransactions,
+    })),
   {
     ssr: false,
     loading: () => (
@@ -98,7 +133,10 @@ const RecentTransactions = dynamic(
             <div className="text-right">Fecha</div>
           </div>
           {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="grid grid-cols-5 items-center p-3 text-sm border-t">
+            <div
+              key={i}
+              className="grid grid-cols-5 items-center p-3 text-sm border-t"
+            >
               <div className="h-4 bg-muted rounded animate-pulse"></div>
               <div className="h-4 bg-muted rounded animate-pulse"></div>
               <div className="h-4 bg-muted rounded animate-pulse"></div>
@@ -109,8 +147,8 @@ const RecentTransactions = dynamic(
         </div>
       </div>
     ),
-  },
-)
+  }
+);
 
 export default function Home() {
   return (
@@ -130,7 +168,10 @@ export default function Home() {
                 <LayoutDashboard className="h-5 w-5" />
                 <span>Inicio</span>
               </Link>
-              <Link href="/" className="flex items-center gap-3 rounded-lg bg-accent px-3 py-2 text-accent-foreground">
+              <Link
+                href="/"
+                className="flex items-center gap-3 rounded-lg bg-accent px-3 py-2 text-accent-foreground"
+              >
                 <LayoutDashboard className="h-5 w-5" />
                 <span>Finanzas</span>
               </Link>
@@ -192,7 +233,9 @@ export default function Home() {
               <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium">Ingresos del Día</CardTitle>
+                    <CardTitle className="text-sm font-medium">
+                      Ingresos del Día
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">$3,240.50</div>
@@ -203,7 +246,9 @@ export default function Home() {
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium">Egresos del Día</CardTitle>
+                    <CardTitle className="text-sm font-medium">
+                      Egresos del Día
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">$1,120.75</div>
@@ -214,7 +259,9 @@ export default function Home() {
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium">Balance del Día</CardTitle>
+                    <CardTitle className="text-sm font-medium">
+                      Balance del Día
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">$2,119.75</div>
@@ -225,12 +272,15 @@ export default function Home() {
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium">Balance del Mes</CardTitle>
+                    <CardTitle className="text-sm font-medium">
+                      Balance del Mes
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">$24,890.30</div>
                     <p className="text-xs text-muted-foreground mt-1">
-                      <span className="text-emerald-500">+5.2%</span> vs. mes anterior
+                      <span className="text-emerald-500">+5.2%</span> vs. mes
+                      anterior
                     </p>
                   </CardContent>
                 </Card>
@@ -242,7 +292,9 @@ export default function Home() {
                 <Card className="col-span-2">
                   <CardHeader>
                     <CardTitle>Ganancias Diarias</CardTitle>
-                    <CardDescription>Ingresos vs. egresos de los últimos 7 días</CardDescription>
+                    <CardDescription>
+                      Ingresos vs. egresos de los últimos 7 días
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <DailyProfitChart />
@@ -253,7 +305,9 @@ export default function Home() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Ganancias Mensuales</CardTitle>
-                    <CardDescription>Evolución de los últimos 6 meses</CardDescription>
+                    <CardDescription>
+                      Evolución de los últimos 6 meses
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <MonthlyProfitChart />
@@ -265,9 +319,14 @@ export default function Home() {
                   <CardHeader className="flex flex-row items-center justify-between">
                     <div>
                       <CardTitle>Control de Inventario</CardTitle>
-                      <CardDescription>Productos con stock bajo</CardDescription>
+                      <CardDescription>
+                        Productos con stock bajo
+                      </CardDescription>
                     </div>
-                    <Link href="/inventario" className="text-sm text-primary hover:underline">
+                    <Link
+                      href="/inventario"
+                      className="text-sm text-primary hover:underline"
+                    >
                       Ver todo
                     </Link>
                   </CardHeader>
@@ -281,9 +340,14 @@ export default function Home() {
                   <CardHeader className="flex flex-row items-center justify-between">
                     <div>
                       <CardTitle>Gestión de Proveedores</CardTitle>
-                      <CardDescription>Facturas pendientes de pago</CardDescription>
+                      <CardDescription>
+                        Facturas pendientes de pago
+                      </CardDescription>
                     </div>
-                    <Link href="/proveedores" className="text-sm text-primary hover:underline">
+                    <Link
+                      href="/proveedores"
+                      className="text-sm text-primary hover:underline"
+                    >
                       Ver todo
                     </Link>
                   </CardHeader>
@@ -297,9 +361,14 @@ export default function Home() {
                   <CardHeader className="flex flex-row items-center justify-between">
                     <div>
                       <CardTitle>Transacciones Recientes</CardTitle>
-                      <CardDescription>Últimos movimientos registrados</CardDescription>
+                      <CardDescription>
+                        Últimos movimientos registrados
+                      </CardDescription>
                     </div>
-                    <Link href="/movimientos" className="text-sm text-primary hover:underline">
+                    <Link
+                      href="/movimientos"
+                      className="text-sm text-primary hover:underline"
+                    >
                       Ver todo
                     </Link>
                   </CardHeader>
@@ -312,7 +381,9 @@ export default function Home() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Flujo de Caja</CardTitle>
-                    <CardDescription>Distribución de ingresos y egresos</CardDescription>
+                    <CardDescription>
+                      Distribución de ingresos y egresos
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <CashFlowSummary />
@@ -324,5 +395,5 @@ export default function Home() {
         </div>
       </div>
     </HydrationBoundary>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { EmployeePerformance } from "@/components/employee-performance"
+import EmployeePerformance from "@/components/employee-performance";
 
 export default function EmpleadosPage() {
   return (
@@ -6,5 +6,5 @@ export default function EmpleadosPage() {
       <h1 className="text-3xl font-bold mb-6">Rendimiento de Empleados</h1>
       <EmployeePerformance />
     </main>
-  )
+  );
 }

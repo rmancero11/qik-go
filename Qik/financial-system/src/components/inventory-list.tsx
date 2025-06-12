@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,10 +9,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Progress } from "@/components/ui/progress"
-import { AlertTriangle, MoreHorizontal } from "lucide-react"
-import Link from "next/link"
+} from "@/components/ui/dropdown-menu";
+import { Progress } from "@/components/ui/progress";
+import { AlertTriangle, MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 
 export function InventoryList() {
   const products = [
@@ -107,7 +107,7 @@ export function InventoryList() {
       stockPercentage: 47,
       status: "low",
     },
-  ]
+  ];
 
   return (
     <div className="rounded-md border">
@@ -122,21 +122,33 @@ export function InventoryList() {
       </div>
       <div>
         {products.map((product) => (
-          <div key={product.id} className="grid grid-cols-7 items-center p-3 text-sm border-t">
+          <div
+            key={product.id}
+            className="grid grid-cols-7 items-center p-3 text-sm border-t"
+          >
             <div className="font-medium">{product.name}</div>
             <div>{product.category}</div>
             <div className="text-center">
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1 mb-1">
-                  {product.status === "low" && <AlertTriangle className="h-3 w-3 text-amber-500" />}
-                  <span className={product.status === "low" ? "text-amber-700" : ""}>
+                  {product.status === "low" && (
+                    <AlertTriangle className="h-3 w-3 text-amber-500" />
+                  )}
+                  <span
+                    className={product.status === "low" ? "text-amber-700" : ""}
+                  >
                     {product.stock} / {product.minStock}
                   </span>
                 </div>
                 <Progress
-                  value={product.stockPercentage > 100 ? 100 : product.stockPercentage}
-                  className={`h-2 w-20 ${product.status === "low" ? "bg-amber-100" : "bg-slate-100"}`}
-                  indicatorClassName={product.status === "low" ? "bg-amber-500" : ""}
+                  value={
+                    product.stockPercentage > 100
+                      ? 100
+                      : product.stockPercentage
+                  }
+                  className={`h-2 w-20 ${
+                    product.status === "low" ? "bg-amber-100" : "bg-slate-100"
+                  }`}
                 />
                 {product.status === "low" && (
                   <Button
@@ -145,12 +157,18 @@ export function InventoryList() {
                     className="mt-2 text-xs bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100"
                     asChild
                   >
-                    <Link href={`/inventario/realizar-pedido?producto=${product.id}`}>Hacer pedido</Link>
+                    <Link
+                      href={`/inventario/realizar-pedido?producto=${product.id}`}
+                    >
+                      Hacer pedido
+                    </Link>
                   </Button>
                 )}
               </div>
             </div>
-            <div className="text-right font-medium">${product.price.toFixed(2)}</div>
+            <div className="text-right font-medium">
+              ${product.price.toFixed(2)}
+            </div>
             <div className="text-right">${product.cost.toFixed(2)}</div>
             <div className="text-center">
               <Badge
@@ -158,9 +176,10 @@ export function InventoryList() {
                 className={
                   new Date(product.expiryDate) < new Date()
                     ? "bg-rose-50 text-rose-700 border-rose-200"
-                    : new Date(product.expiryDate) < new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-                      ? "bg-amber-50 text-amber-700 border-amber-200"
-                      : ""
+                    : new Date(product.expiryDate) <
+                      new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                    ? "bg-amber-50 text-amber-700 border-amber-200"
+                    : ""
                 }
               >
                 {product.expiryDate}
@@ -181,16 +200,28 @@ export function InventoryList() {
                   <DropdownMenuLabel>Acciones</DropdownMenuLabel>
                   <DropdownMenuItem>Ver detalles</DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href={`/inventario/editar/${product.id}`}>Editar producto</Link>
+                    <Link href={`/inventario/editar/${product.id}`}>
+                      Editar producto
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild className="text-amber-500">
-                    <Link href={`/inventario/registrar-perdida?producto=${product.id}`}>Registrar pérdida</Link>
+                    <Link
+                      href={`/inventario/registrar-perdida?producto=${product.id}`}
+                    >
+                      Registrar pérdida
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="text-emerald-500">
-                    <Link href={`/inventario/realizar-pedido?producto=${product.id}`}>Realizar pedido</Link>
+                    <Link
+                      href={`/inventario/realizar-pedido?producto=${product.id}`}
+                    >
+                      Realizar pedido
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-rose-500">Eliminar</DropdownMenuItem>
+                  <DropdownMenuItem className="text-rose-500">
+                    Eliminar
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -198,5 +229,5 @@ export function InventoryList() {
         ))}
       </div>
     </div>
-  )
+  );
 }
