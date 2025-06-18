@@ -1,121 +1,196 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Line } from "react-chartjs-2"
+import { useEffect, useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 interface AccountBalanceChartProps {
-  type: "activo" | "pasivo" | "patrimonio"
+  type: "activo" | "pasivo" | "patrimonio";
 }
 
 export function AccountBalanceChart({ type }: AccountBalanceChartProps) {
-  const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
 
   // Datos de ejemplo para cada tipo de cuenta
   const chartData = {
+    activo: [
+      {
+        mes: "Ene",
+        Caja: 1800,
+        Bancos: 15200,
+        "Cuentas por Cobrar": 4200,
+      },
+      {
+        mes: "Feb",
+        Caja: 2100,
+        Bancos: 16500,
+        "Cuentas por Cobrar": 4800,
+      },
+      {
+        mes: "Mar",
+        Caja: 1950,
+        Bancos: 17200,
+        "Cuentas por Cobrar": 5500,
+      },
+      {
+        mes: "Abr",
+        Caja: 2300,
+        Bancos: 16800,
+        "Cuentas por Cobrar": 4900,
+      },
+      {
+        mes: "May",
+        Caja: 2200,
+        Bancos: 17500,
+        "Cuentas por Cobrar": 5100,
+      },
+      {
+        mes: "Jun",
+        Caja: 2450,
+        Bancos: 18750,
+        "Cuentas por Cobrar": 5320,
+      },
+    ],
+    pasivo: [
+      {
+        mes: "Ene",
+        "Cuentas por Pagar": 7500,
+        Préstamos: 31000,
+        "Impuestos por Pagar": 2800,
+      },
+      {
+        mes: "Feb",
+        "Cuentas por Pagar": 8200,
+        Préstamos: 30500,
+        "Impuestos por Pagar": 3100,
+      },
+      {
+        mes: "Mar",
+        "Cuentas por Pagar": 7800,
+        Préstamos: 30000,
+        "Impuestos por Pagar": 2900,
+      },
+      {
+        mes: "Abr",
+        "Cuentas por Pagar": 8500,
+        Préstamos: 29500,
+        "Impuestos por Pagar": 3200,
+      },
+      {
+        mes: "May",
+        "Cuentas por Pagar": 8100,
+        Préstamos: 29000,
+        "Impuestos por Pagar": 3000,
+      },
+      {
+        mes: "Jun",
+        "Cuentas por Pagar": 8750,
+        Préstamos: 30000,
+        "Impuestos por Pagar": 3250,
+      },
+    ],
+    patrimonio: [
+      {
+        mes: "Ene",
+        Capital: 50000,
+        Reservas: 4000,
+        Resultados: 15000,
+      },
+      {
+        mes: "Feb",
+        Capital: 50000,
+        Reservas: 4000,
+        Resultados: 16500,
+      },
+      {
+        mes: "Mar",
+        Capital: 50000,
+        Reservas: 4500,
+        Resultados: 18000,
+      },
+      {
+        mes: "Abr",
+        Capital: 50000,
+        Reservas: 4500,
+        Resultados: 19500,
+      },
+      {
+        mes: "May",
+        Capital: 50000,
+        Reservas: 5000,
+        Resultados: 20500,
+      },
+      {
+        mes: "Jun",
+        Capital: 50000,
+        Reservas: 5000,
+        Resultados: 21250,
+      },
+    ],
+  };
+
+  const data = chartData[type];
+
+  const colors = {
     activo: {
-      labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
-      datasets: [
-        {
-          label: "Caja",
-          data: [1800, 2100, 1950, 2300, 2200, 2450],
-          borderColor: "rgba(6, 182, 212, 1)",
-          backgroundColor: "rgba(6, 182, 212, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Bancos",
-          data: [15200, 16500, 17200, 16800, 17500, 18750],
-          borderColor: "rgba(14, 165, 233, 1)",
-          backgroundColor: "rgba(14, 165, 233, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Cuentas por Cobrar",
-          data: [4200, 4800, 5500, 4900, 5100, 5320],
-          borderColor: "rgba(79, 70, 229, 1)",
-          backgroundColor: "rgba(79, 70, 229, 0.2)",
-          tension: 0.4,
-        },
-      ],
+      Caja: "#06b6d4",
+      Bancos: "#0ea5e9",
+      "Cuentas por Cobrar": "#4f46e5",
     },
     pasivo: {
-      labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
-      datasets: [
-        {
-          label: "Cuentas por Pagar",
-          data: [7500, 8200, 7800, 8500, 8100, 8750],
-          borderColor: "rgba(249, 115, 22, 1)",
-          backgroundColor: "rgba(249, 115, 22, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Préstamos",
-          data: [31000, 30500, 30000, 29500, 29000, 30000],
-          borderColor: "rgba(220, 38, 38, 1)",
-          backgroundColor: "rgba(220, 38, 38, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Impuestos por Pagar",
-          data: [2800, 3100, 2900, 3200, 3000, 3250],
-          borderColor: "rgba(236, 72, 153, 1)",
-          backgroundColor: "rgba(236, 72, 153, 0.2)",
-          tension: 0.4,
-        },
-      ],
+      "Cuentas por Pagar": "#f97316",
+      Préstamos: "#dc2626",
+      "Impuestos por Pagar": "#ec4899",
     },
     patrimonio: {
-      labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
-      datasets: [
-        {
-          label: "Capital",
-          data: [50000, 50000, 50000, 50000, 50000, 50000],
-          borderColor: "rgba(16, 185, 129, 1)",
-          backgroundColor: "rgba(16, 185, 129, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Reservas",
-          data: [4000, 4000, 4500, 4500, 5000, 5000],
-          borderColor: "rgba(5, 150, 105, 1)",
-          backgroundColor: "rgba(5, 150, 105, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Resultados",
-          data: [15000, 16500, 18000, 19500, 20500, 21250],
-          borderColor: "rgba(4, 120, 87, 1)",
-          backgroundColor: "rgba(4, 120, 87, 0.2)",
-          tension: 0.4,
-        },
-      ],
+      Capital: "#10b981",
+      Reservas: "#059669",
+      Resultados: "#047857",
     },
-  }
-
-  const data = chartData[type]
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top" as const,
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  }
+  };
 
   if (!isClient) {
-    return <div className="h-full flex items-center justify-center">Cargando gráfico...</div>
+    return (
+      <div className="h-full flex items-center justify-center">
+        Cargando gráfico...
+      </div>
+    );
   }
 
-  return <Line data={data} options={options} />
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart
+        data={data}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="mes" />
+        <YAxis />
+        <Tooltip formatter={(value) => [`$${value.toLocaleString()}`, ""]} />
+        <Legend />
+        {Object.keys(colors[type]).map((key) => (
+          <Line
+            key={key}
+            type="monotone"
+            dataKey={key}
+            stroke={colors[type][key as keyof (typeof colors)[typeof type]]}
+            strokeWidth={2}
+            dot={{ r: 4 }}
+          />
+        ))}
+      </LineChart>
+    </ResponsiveContainer>
+  );
 }
