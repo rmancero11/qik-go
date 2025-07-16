@@ -203,10 +203,6 @@ const { data, error } = await supabase
     p_fecha_pago: '2023-11-15',  // Formato YYYY-MM-DD
     p_forma_pago: 'CONTADO'
   });
-
-// Obtener todas las tablas
-const { data, error } = await supabase
-  .rpc('get_all_tables');
 ```
 
 ## Ventajas de este enfoque
