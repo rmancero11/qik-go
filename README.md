@@ -1,5 +1,4 @@
-# qik-go
-Sistema contable para negocios
+## qik-go - Sistema contable para negocios
 -----
 
 # Funciones PostgreSQL para registrar ventas y compras
